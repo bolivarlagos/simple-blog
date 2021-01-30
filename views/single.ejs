@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head') %>
+<body>
+    <%- include('./partials/nav') %>
+    <div class="blog">
+        <h1><%= blog.title %></h1>
+        <p><%= blog.subtitle %></p>
+        <p><%= blog.body %> </p>
+        <p><%= blog._id %> </p>
+        <button class="del" data-id="<%=blog._id%>">Delete</button> 
+    </div>  
+    <script>
+        const del = document.querySelector('.del');
+        del.addEventListener('click', () => {
+            let endpoint = `/remove/${del.dataset.id}`;
+            fetch(endpoint, {
+                method: 'delete'
+            })
+            .then(response => { 
+                response.json()
+                .then(data => {
+                    window.location.href = data.redirect
+                })
+            })            
+            .catch(error => {
+                console.log(error);
+            });
+        });
+    </script>
+</body>
+</html>
