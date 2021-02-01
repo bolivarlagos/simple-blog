@@ -1,26 +1,22 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Blog</title>
-    <link rel="stylesheet" href="/style.css" class="style">
-</head>
+<%- include('./partials/head') %>
 <body>
-    <nav class="nav">
-        <h1>Blog</h1>
-        <div class="nav-items">
-            <a href="/">Home</a>
-            <a href="/about">About</a>
-            <a href="/contact">Contact</a>
+    <%- include('./partials/nav') %>
+    <div class="row">
+        <div class="col-md-8">
+            <article class="blog-post">
+                <% blogs.map(blog => { %>  
+                    <a href="/blog/<%=blog._id%>"><h2 class="blog-post-title"><%= blog.title %></h2></a>
+                    <p class="blog-post-meta">January 1, 2014 by <a href="#">Admin</a></p>             
+                    <p><%= blog.subtitle %></p>
+                    <p><%= blog.text %></p>
+                <% }); %>        
+            </article>
         </div>
-    </nav>  
-    <div class="blogs">
-        <ul>
-            <li>Blog 1</li>
-            <li>Blog 2</li>
-            <li>Blog 3</li>
-        </ul>
-    </div>  
+        <%- include('./partials/archives') %>
+    </div>
+    <%- include('./partials/footer') %>    
 </body>
 </html>
+

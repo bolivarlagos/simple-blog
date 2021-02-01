@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head') %>
+
+    <body>
+        <%- include('./partials/nav') %>
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="p-4 mb-3 bg-light rounded">
+                        <div class="carousel-inner">  
+                            <% news.items.map(item => {%>
+                                <div class="">                                        
+                                    <a href="<%= item.link %>"><h3><%= item.title %></h3></a>
+                                    <p><%= item.pubDate %></p>
+                                    <%= item.contentSnippet %>
+                                </div>                                 
+                            <% }) %>                                                              
+                        </div>                           
+                    </div>
+                </div>
+                <%- include('./partials/archives') %>
+            </div>
+            <%- include('./partials/footer') %>
+    </body>
+
+</html>

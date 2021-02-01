@@ -1,7 +1,12 @@
 FROM node:latest
 
-COPY . /blog-project
+WORKDIR /usr/src/blog-project
 
-RUN npm install -g npm@7.5.0
+COPY . .
 
-CMD node /blog-project/app.js
+RUN npm install
+
+EXPOSE 3000
+
+CMD ["node", "app.js"]
+

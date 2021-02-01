@@ -2,31 +2,33 @@
 <html lang="en">
 <%- include('./partials/head') %>
 <body>
-    <%- include('./partials/nav') %>
-    <div class="blog">
-        <h1><%= blog.title %></h1>
-        <p><%= blog.subtitle %></p>
-        <p><%= blog.body %> </p>
-        <p><%= blog._id %> </p>
-        <button class="del" data-id="<%=blog._id%>">Delete</button> 
-    </div>  
+    <%- include('./partials/nav') %> 
+    <div class="row">
+        <div class="col-md-8"> 
+            <article class="blog-post">
+                <h2 class="blog-post-title"><%= blog.title %></h2>
+                <p class="blog-post-meta">January 1, 2014 by <a href="#">Admin</a></p>  
+                <p><%= blog.subtitle %></p>
+                <p><%= blog.text %></p> 
+                <a class="delete" data-doc="<%=blog._id%>"><button class="btn">Delete</button></a>      
+            </article>
+        </div>
+        <%- include('./partials/archives') %>
+    </div>
+    <%- include('./partials/footer') %>     
     <script>
-        const del = document.querySelector('.del');
-        del.addEventListener('click', () => {
-            let endpoint = `/remove/${del.dataset.id}`;
+        const delBtn = document.querySelector('.delete');
+        delBtn.addEventListener('click', () => {
+            const endpoint = `/remove/${delBtn.dataset.doc}`;
             fetch(endpoint, {
-                method: 'delete'
+                method: 'DELETE'
             })
-            .then(response => { 
-                response.json()
-                .then(data => {
-                    window.location.href = data.redirect
-                })
-            })            
+            .then(response => response.json())
+            .then(data => window.location.href = data.redirect)
             .catch(error => {
                 console.log(error);
             });
         });
-    </script>
+    </script>    
 </body>
 </html>
